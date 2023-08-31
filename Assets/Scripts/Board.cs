@@ -7,6 +7,8 @@ public class Board : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
     [SerializeField]
+    private GameObject _prefab;
+    [SerializeField]
     private int width;
     [SerializeField]
     private int height;
@@ -22,18 +24,25 @@ public class Board : MonoBehaviour
 
     private void CreateGrid()
     {
-        Vector3 tr = spawnPoint.transform.position;
+        
         for(int y = 0; y <= height; y++)
         {
             for(int x = 0; x <= width; x++)
             {
                 grid = new Tile[height, width];
-                var cell = Instantiate(prefab, tr, Quaternion.identity);
+                GameObject pref = CreatePrefabs();
+                var component = pref.GetComponent<Tile>();
                 Vector2Int vector2Int = new Vector2Int(y, x);
-                //grid[y, x] = (Tile)cell;
+                grid[y, x] = component;
                 grid[y, x].coordinates = vector2Int;
             }
         }
     }
 
+    private GameObject CreatePrefabs()
+    {
+        Vector3 tr = spawnPoint.transform.position;
+         _prefab = Instantiate(prefab, tr, Quaternion.identity);
+        return _prefab;
+    }
 }
