@@ -31,10 +31,11 @@ public class Board : MonoBehaviour
                 grid = new Tile[height, width];
                 GameObject pref = CreatePrefabs(tr);
                 pref.transform.SetParent(gameObject.transform, false);
+                pref.name = $"Tile: {x} {y}";
                 var tile = pref.GetComponent<Tile>();
                 var rect = pref.GetComponent<RectTransform>();
 
-                rect.position = new Vector3(spawnPoint.position.x+x, spawnPoint.position.y+y);
+                rect.position = new Vector3(spawnPoint.position.x+x, spawnPoint.position.y+y*-1);
                 
                 Vector2Int vector2Int = new Vector2Int(y, x);
                 grid[y, x] = tile;
