@@ -33,11 +33,16 @@ public class Board : MonoBehaviour
                 
                 GameObject pref = CreateCell();
                 pref.transform.SetParent(gameObject.transform, false);
+                pref.name = $"Tile: {x} {y}";
                 var tile = pref.GetComponent<Tile>();
                 var rect = pref.GetComponent<RectTransform>();
 
+
                 //rect.position = new Vector3(vect.x+x, vect.y+y*-1);
                 
+
+                rect.position = new Vector3(spawnPoint.position.x+x, spawnPoint.position.y+y*-1);
+
                 
                 grid[y, x] = tile;
                 grid[y, x].coordinates = new(x,y);
